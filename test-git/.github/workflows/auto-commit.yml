@@ -2,7 +2,7 @@ name: Auto Commit
 
 on:
   schedule:
-    - cron: "23 12 * * *" # Runs daily at midnight UTC
+    - cron: "26 12 * * *" # Runs daily at midnight UTC
 
 jobs:
   build:
@@ -17,8 +17,8 @@ jobs:
 
       - name: Commit Changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'lohit-50'
+          git config --global user.email 'lohit.profiles@gmail.com'
           git add update_log.txt
           git commit -m "Automated commit on $(date)"
           git push
