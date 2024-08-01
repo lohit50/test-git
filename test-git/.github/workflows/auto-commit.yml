@@ -2,24 +2,25 @@ name: Auto Commit
 
 on:
   schedule:
-    - cron: "0 0 * * *" 
-  push:
-    branches:
-      - main
+    - cron: "23 12 * * *" # Runs daily at midnight UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Update content
+      - name: Update Content
+        run: echo $(date) >> update_log.txt
+
+      - name: Commit Changes
         run: |
-          echo $(date) >> update_log.txt
-          git config --global user.name 'lohit50'
-          git config --global user.email 'lohit.profiles@gmail.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add update_log.txt
           git commit -m "Automated commit on $(date)"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
